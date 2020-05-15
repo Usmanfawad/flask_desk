@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SignIn</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/login.css')}}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Lacquer&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+​
+<div id="bg"></div>
+​
+<header>
+
+</header>
+​
+<main>
+
+    <section id="card">
+            ​{% with messages = get_flashed_messages(with_categories=true)%}
+                {% if messages %}
+                    {% for category,message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <span id="login-header">
+                <h1>Sign In</h1>
+            </span>
+​
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="row login-row">
+                <div class="col-md-12 login-col">
+
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid",placeholder="Email") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors%}
+                                <span> {{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg",placeholder="Email") }}
+                    {% endif %}
+
+
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid",placeholder="Password") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors%}
+                                <span> {{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg",placeholder="Password") }}
+                    {% endif %}
+                </div>
+​               <div class="form-check">
+                    {{ form.remember(class="form-check-input") }}
+                    {{ form.remember.label(class="form-check-label") }}
+                </div>
+            </div>
+            <span>
+
+            {{ form.submit(class="btn btn-outline-info signin-btn") }}
+                <small class="text-muted ml-2">
+                <a href="#">Forgot Password?</a>
+                </small>
+            </span>
+        </form>
+​
+​
+​
+​
+    </section>
+​
+    <section id="primary">
+        <h1>ProDesk</h1>
+        <p>Your very own Helpdesk.</p>
+​
+​
+    </section>
+</main>
+​
+​
+​
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

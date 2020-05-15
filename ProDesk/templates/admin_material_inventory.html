@@ -1,0 +1,142 @@
+{% extends "layout.html" %}
+
+                {%block tabs%}
+                    <li>
+                        <a href="{{url_for('admin_material_dashboard')}}"><i class="fa fa-user"></i> <span class="nav-label">Dashboard</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="{{url_for('admin_material_inventory')}}"><i class="fa fa-cubes"></i> <span class="nav-label">Inventory</span></a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('admin_material_users')}}"><i class="fa fa-users"></i> <span class="nav-label">Users</span></a>
+                    </li>
+                {% endblock%}
+
+                    {%block content%}
+                    <div class="row white-bg text-center" style="padding: 20px;">
+                        <div class="col-md-12" style="border-style: ridge;border-color: #8b8b8b;padding: 20px;">
+                            <h2>Inventory</h2>
+                            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>IP Address</th>
+                                            <th>Mac address</th>
+                                            <th>Purchase Date</th>
+                                            <th>Ageing Date</th>
+                                            <th>User custody</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for all in inventory_items %}
+                                        <tr>
+                                            <td>{{all.id}}</td>
+                                            <td>{{all.name}}</td>
+                                            <td>{{all.ip_address}}</td>
+                                            <td>{{all.mac_address}}</td>
+                                            <td>{{all.purchase_date}}</td>
+                                            <td>{{all.ageing_date}}</td>
+                                            {% if all.user_id %}
+                                                <td>{{all.user_id}}</td>
+                                            {% else %}
+                                                <td><a  class="btn-dark" style="padding: 5px;" href="{{url_for('admin_material_inventory_users',item_id=all.id)}}">Assign User</a></td>
+                                            {% endif %}
+                                    {% endfor %}
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        </div>
+                    </div>
+                        <div class="row text-center" style="margin-top: 30px;">
+                            <div class="col-md-12">
+                                <h2 class="text-center" style="margin-bottom: 10px;">Inventory Form</h2>
+                                 <form method="POST" action="{{url_for('admin_material_inventory')}}" enctype="multipart/form-data">
+                                     {{ form.hidden_tag() }}
+
+                                    <div class="row">
+                                        <div class="col-md-12" style="margin-bottom: 50px;">
+                                            <div class="form-group">
+                                                {% if form.name.errors %}
+                                                    {{ form.name(class="form-control is-invalid",placeholder="Item Name") }}
+                                                    <div class="invalid-feedback">
+                                                        {% for error in form.name.errors %}
+                                                            <span>{{ error }}</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% else %}
+                                                    {{ form.name(class="form-control",placeholder="Item Name") }}
+                                                {% endif %}
+                                            </div>
+                                            <div class="form-group">
+                                                {% if form.ip_address.errors %}
+                                                    {{ form.ip_address(class="form-control is-invalid",placeholder="Ip Address") }}
+                                                    <div class="invalid-feedback">
+                                                        {% for error in form.ip_address.errors %}
+                                                            <span>{{ error }}</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% else %}
+                                                    {{ form.ip_address(class="form-control",placeholder="Ip Address") }}
+                                                {% endif %}
+                                            </div>
+
+                                            <div class="form-group">
+                                                {% if form.mac_address.errors %}
+                                                    {{ form.mac_address(class="form-control is-invalid",placeholder="Mac Address") }}
+                                                    <div class="invalid-feedback">
+                                                        {% for error in form.mac_address.errors %}
+                                                            <span>{{ error }}</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% else %}
+                                                    {{ form.mac_address(class="form-control",placeholder="Mac Address") }}
+                                                {% endif %}
+                                            </div>
+
+                                            <div class="form-group">
+                                                {% if form.purchase_date.errors %}
+                                                    {{ form.purchase_date(class="form-control is-invalid",placeholder="Purchasing Date") }}
+                                                    <div class="invalid-feedback">
+                                                        {% for error in form.purchase_date.errors%}
+                                                            <span> {{ error }}</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% else %}
+                                                    {{ form.purchase_date(class="form-control",placeholder="Purchasing date") }}
+                                                {% endif %}
+
+                                            </div>
+<!--                                        </div>-->
+
+<!--                                        <div class="col-md-6">-->
+                                            <div class="form-group">
+                                                {% if form.ageing_date.errors %}
+                                                    {{ form.ageing_date(class="form-control is-invalid",placeholder="Ageing Date") }}
+                                                    <div class="invalid-feedback">
+                                                        {% for error in form.ageing_date.errors %}
+                                                            <span>{{ error }}</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% else %}
+                                                    {{ form.ageing_date(class="form-control",placeholder="Ageing date") }}
+                                                {% endif %}
+                                            </div>
+
+                                            {{ form.submit(class="btn btn-outline-info") }}
+<!--                                        </div>-->
+                                        </div>
+                                    </div>
+                                 </form>
+                            </div>
+                        </div>
+                    {%endblock%}
+
+
+    {%block scripts%}
+        <script>
+            $(document).ready(function() {
+                $('#example').DataTable();
+            } );
+        </script>
+    {%endblock%}

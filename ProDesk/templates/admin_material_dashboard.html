@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+                {%block tabs%}
+                    <li class="active">
+                        <a href="{{url_for('admin_material_dashboard')}}"><i class="fa fa-user"></i> <span class="nav-label">Dashboard</span></a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('admin_material_inventory')}}"><i class="fa fa-cubes"></i> <span class="nav-label">Inventory</span></a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('admin_material_users')}}"><i class="fa fa-users"></i> <span class="nav-label">Users</span></a>
+                    </li>
+                {% endblock%}
+
+                    {%block content%}
+ <div class="container">
+        <div class="row white-bg text-center">
+            <div class="col-lg-3 col-sm-4">
+                <div class="card-box bg-blue">
+                    <div class="inner">
+                        <h3> {{ count_users }} </h3>
+                        <p> Total registered users </p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                    </div>
+                    <a href="#" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+​
+            <div class="col-lg-3 col-sm-4">
+                <div class="card-box bg-green">
+                    <div class="inner">
+                        <h3> $185358 </h3>
+                        <p> Today’s Collection </p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-money" aria-hidden="true"></i>
+                    </div>
+                    <a href="#" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-4">
+                <div class="card-box bg-orange">
+                    <div class="inner">
+                        <h3> {{count_inventory_unassigned}} </h3>
+                        <p> Unassigned Inventory Items</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    </div>
+                    <a href="#" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-4">
+                <div class="card-box bg-red">
+                    <div class="inner">
+                        <h3> {{count_inventory_assigned}} </h3>
+                        <p> Assigned Inventory Items </p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-bell-slash"></i>
+                    </div>
+                    <a href="#" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+                    {%endblock%}
