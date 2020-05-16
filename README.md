@@ -1,5 +1,10 @@
 # Prodesk
 
+https://probitsbookservice.herokuapp.com/
+You can use the following credentials to login.
+email: usman@gmail.com 
+password: 123
+
 Prodesk is a helpdesk created using the web framework "Flask". The ticketing system is still in process. The material management system ( inventory system ) has been added.
 ## Installation
 
