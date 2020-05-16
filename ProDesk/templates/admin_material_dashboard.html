@@ -27,7 +27,7 @@
                     <a href="#" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-​
+
             <div class="col-lg-3 col-sm-4">
                 <div class="card-box bg-green">
                     <div class="inner">
@@ -66,7 +66,65 @@
             </div>
         </div>
     </div>
+<div class="row">
+
+    <div class='col-md-6 offset-md-3 pt-5'>
+         <div class='card'>
+          <div class='card-body'>
+        <h1><button class="btn btn-success" onclick="updateChart()">Update</button></h1>
+          </div>
+           <div class='card-body'>
+        <canvas id="myChart"></canvas>
+        </div>
+        </div>
+    </div>
+
+</div>
+    {%endblock%}
+
+{% block scripts %}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
+      var assigndata=[0, 10, 5, 2, 20, 30, 45];
+      var newassigndata=[15, 17, 25, 29, 33, 44, 55];
+      var unassigndata=[30, 40, 50, 60, 70, 80, 95];
+      var newunassigndata=[09, 12, 15, 20, 39, 43, 51];
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'Assigned Items',
+
+            borderColor: '#0E818B',
+            data: assigndata,
+        },{
+
+            label: 'Unassigned Items',
+            borderColor: '#10B4AB',
+            data: unassigndata,
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+      function updateChart() {
+
+        chart.data.datasets[0].data= newassigndata;
+        chart.data.datasets[1].data= newunassigndata;
+        chart.update();
+      };
 
 
-
-                    {%endblock%}
+    </script>
+<!--    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>-->
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>-->
+{% endblock %}
