@@ -88,7 +88,7 @@ def admin_material_dashboard():
     count_inventory_unassigned=0
     count_inventory_assigned=0
     for all in inventory_items:
-        if all.user_id=="":
+        if all.user_id=="" or all.user_id==" " or all.user_id=="None" or all.user_id==None:
             count_inventory_unassigned+=1
         else:
             count_inventory_assigned+=1
